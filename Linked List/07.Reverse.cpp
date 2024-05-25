@@ -52,10 +52,10 @@ void display(Node* head)
     cout<<"NULL\n";
 }
 
-Node* reverse(Node* &head)
+Node* reverseIterative(Node* &head)
 {
-    if(head == NULL)
-        return NULL;
+    if(head == NULL || head->next == NULL)
+        return head;
     
     Node* prevPtr = NULL;
     Node* currPtr = head;
@@ -74,6 +74,18 @@ Node* reverse(Node* &head)
 
 }
 
+Node* reverseRecursive(Node* &head)
+{
+    if(head == NULL || head->next == NULL)
+        return head;
+    
+    Node* newHead = reverseRecursive(head->next);
+    head->next->next = head;
+    head->next = NULL;
+
+    return newHead;
+}
+
 int main()
 {
 
@@ -88,8 +100,14 @@ int main()
 
     display(head);
 
-    head = reverse(head);
+    head = reverseIterative(head);
 
     display(head);
+
+    head = reverseRecursive(head);
+
+    display(head);
+
+    return 0;
 
 }
