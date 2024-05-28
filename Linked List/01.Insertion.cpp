@@ -16,8 +16,7 @@ using namespace std;
 // };
 
 // Defining the Node structure
-struct Node
-{
+struct Node {
     int data;   // Data stored in the node
     Node* next; // Pointer to the next node in the list
 
@@ -38,7 +37,7 @@ void insertAtTail(Node* &head, int val)
 {
     Node* newNode = new Node(val);
 
-     // If the list is empty, insert the node at the head
+    // If the list is empty, insert the node at the head
     if(head == NULL)
     {
         insertAtHead(head, val);
@@ -47,6 +46,7 @@ void insertAtTail(Node* &head, int val)
 
     Node* temp = head;
 
+    // Traverse to the end of the list
     while(temp->next != NULL)
     {
         temp = temp->next;
@@ -60,6 +60,7 @@ void printList(Node* head)
 {
     Node* temp = head;
 
+    // Traverse to the end of the list
     while(temp != NULL)
     {
         cout<< temp->data << " -> ";
