@@ -55,8 +55,8 @@ void printList(Node* head)
     cout << "NULL\n" ;
 }
 
-// Function to search for a value in the linked list and return its index
-int search(Node* &head, int key)
+// Function to search by a value in the linked list and return its index
+int searchByValue(Node* &head, int value)
 {
     int count = 0;
     Node* temp = head;
@@ -64,13 +64,30 @@ int search(Node* &head, int key)
     // Traverse the list to find the key
     while (temp != NULL)
     {
-        if (temp->data == key)
+        if (temp->data == value)
             return count;
 
         temp = temp->next;
         count++;
     }
     return -1; // Return -1 if the key is not found
+}
+
+// Function to search by index(0-based) in the linked list and return its value
+int searchByIndex(Node* &head, int index)
+{
+    int count = 0;
+    Node* temp = head;
+
+    // Traverse the list to find the key
+    while (temp != NULL)
+    {
+        if (count == index)
+            return temp->data;
+
+        temp = temp->next;
+        count++;
+    }
 }
 
 int main()
@@ -89,7 +106,7 @@ int main()
 
     // Test search function
     int value = 1;
-    int index = search(head, value);
+    int index = searchByValue(head, value);
 
     if (index >= 0)
         cout << "Found at index = " << index << endl;
@@ -98,7 +115,7 @@ int main()
 
     // Additional edge case: search for a value not in the list
     value = 7;
-    index = search(head, value);
+    index = searchByValue(head, value);
 
     if (index >= 0)
         cout << "Found at index = " << index << endl;
@@ -110,7 +127,7 @@ int main()
     printList(head); // Should print "NULL"
 
     // Additional edge case: search in an empty list
-    index = search(head, 1);
+    index = searchByValue(head, 1);
     if (index >= 0)
         cout << "Found at index = " << index << endl;
     else
