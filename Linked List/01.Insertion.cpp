@@ -1,18 +1,31 @@
 #include<bits/stdc++.h>
 using namespace std;
 
-class Node {
-    public:
-        int data;
-        Node* next;
+// Defining a Class for the Node structure
+// class Node {
+//     public:
+//         int data;   // Data stored in the node
+//         Node* next; // Pointer to the next node in the list
 
-        Node(int val)
-        {
-            data = val;
-            next = NULL;
-        }
+//         // Constructor to initialize the node with a value
+//         Node(int val)
+//         {
+//             data = val;
+//             next = NULL;
+//         }
+// };
+
+// Defining the Node structure
+struct Node
+{
+    int data;   // Data stored in the node
+    Node* next; // Pointer to the next node in the list
+
+    // Constructor to initialize the node with a value
+    Node(int x) : data(x), next(NULL) {}
 };
 
+// Function to insert a node at the head of the list
 void insertAtHead(Node* &head, int val)
 {
     Node* newNode = new Node(val);
@@ -20,10 +33,12 @@ void insertAtHead(Node* &head, int val)
     head = newNode;
 }
 
+// Function to insert a node at the tail of the list
 void insertAtTail(Node* &head, int val)
 {
     Node* newNode = new Node(val);
 
+     // If the list is empty, insert the node at the head
     if(head == NULL)
     {
         insertAtHead(head, val);
@@ -40,7 +55,8 @@ void insertAtTail(Node* &head, int val)
     temp->next = newNode;
 }
 
-void display(Node* head)
+// Function to print the linked list
+void printList(Node* head)
 {
     Node* temp = head;
 
@@ -55,14 +71,14 @@ void display(Node* head)
 int main()
 {
 
-    Node* head = NULL;
+    Node* head = NULL; // Initialize an empty list
 
-    insertAtHead(head, 1);
-    insertAtTail(head, 2);
-    insertAtTail(head, 3);
+    insertAtHead(head, 1); // Insert 1 at the head
+    insertAtTail(head, 2); // Insert 2 at the tail
+    insertAtTail(head, 3); // Insert 3 at the tail
 
-    insertAtHead(head, 4);
+    insertAtHead(head, 0); // Insert 4 at the head
 
-    display(head);
+    printList(head);
 
 }
