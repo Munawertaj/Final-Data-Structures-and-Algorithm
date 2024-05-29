@@ -1,110 +1,115 @@
 #include<bits/stdc++.h>
 using namespace std;
 
-class Node {
-    public:
-        Node* next;
-        int data;
+// Defining the Node structure
+struct Node {
+    int data;   // Data stored in the node
+    Node* next; // Pointer to the next node in the list
 
-        Node(int val)
-        {
-            next = NULL;
-            data = val;
-        }
+    // Constructor to initialize the node with a value
+    Node(int x) : data(x), next(NULL) {}
 };
 
-void insertAtFirst(Node* &head, int val)
+// Function to insert a node at the head of the list
+void insertAtHead(Node* &head, int val)
 {
     Node* newNode = new Node(val);
-
     newNode->next = head;
     head = newNode;
 }
 
-void insertAtLast(Node* &head, int val)
+// Function to insert a node at the tail of the list
+void insertAtTail(Node* &head, int val)
 {
+    Node* newNode = new Node(val);
+
+     // If the list is empty, insert the node at the head
     if(head == NULL)
     {
-        insertAtFirst(head, val);
+        insertAtHead(head, val);
         return;
     }
 
-    Node* newNode = new Node(val);
     Node* temp = head;
+
+    // Traverse to the end of the list
     while(temp->next != NULL)
     {
-        temp =  temp->next;
+        temp = temp->next;
     }
 
     temp->next = newNode;
 }
 
-void deleteFromFirst(Node* &head, int position)
+// Function to print the linked list
+void printList(Node* head)
 {
     Node* temp = head;
-    Node* toDelete = NULL;
 
-    // If First Node (head) to delete
-    if(position == 0)
+    // Traverse to the end of the list
+    while(temp != NULL)
     {
-        toDelete = head;
-        head = head->next;
-        delete toDelete;
-        return;
+        cout<< temp->data << " -> ";
+        temp = temp->next;
     }
+    cout << "NULL\n" ;
+}
 
+// Function to delete a node from the first (head)
+Node* deleteFromFirst(Node* &head, int index)
+{
+    if (head == NULL || index == 0)
+        return head;
+    
+    // A dummy node is created with the purpose of simply handle the edge cases
+    Node* dummy = new Node(0);
+    dummy->next = head;
+
+    Node* temp = dummy;
+    Node* toDelete;
     int count = 1;
 
-    while(temp != NULL && count < position)
+    // Traverse to the node just before the index to delete
+    while(temp != NULL && count < index)
     {
         temp = temp->next;
         count++;
     }
 
-    if(temp == NULL || temp ->next == NULL)
+    // If the index is out of bounds or the next node is NULL
+    if(temp == NULL || temp->next == NULL)
     {
-        cout << "Deletion is not possible because K-th node is Out of bound!!!\n";
-        return;
+        cout << "K-th node is Out of bound!!!\n";
+        return dummy->next;
     }
     
     toDelete = temp->next;
     temp->next = temp->next->next;
     delete toDelete;
-}
 
-void display(Node* &head)
-{
-    Node* temp = head;
-
-    while(temp != NULL)
-    {
-        cout << temp->data << " -> ";
-        temp = temp->next;
-    }
-    cout<<"NULL\n";
+    return dummy->next;
 }
 
 int main()
 {
     Node* head = NULL;
 
-    insertAtLast(head, 1);
-    insertAtLast(head, 2);
-    insertAtLast(head, 3);
-    // insertAtLast(head, 4);
-    // insertAtLast(head, 5);
-    // insertAtLast(head, 6);
-    // insertAtLast(head, 7);
-    // insertAtLast(head, 8);
-    // insertAtFirst(head, 1);
+    insertAtTail(head, 1);
+    insertAtTail(head, 2);
+    insertAtTail(head, 3);
+    // insertAtTail(head, 4);
+    // insertAtTail(head, 5);
+    // insertAtTail(head, 6);
+    // insertAtTail(head, 7);
+    // insertAtTail(head, 8);
 
-    display(head);
+    printList(head);
 
-    // Starting index from 0
-    int deleteNode = 4; //It means it will delete 5-th node if first node is consider as 1
+    // Delete the node at index (indexing starts from 1)
+    int deleteNode = 4;
 
-    deleteFromFirst(head, deleteNode);
+    head = deleteFromFirst(head, deleteNode);
 
-    display(head);
+    printList(head);
 
 }
