@@ -1,18 +1,16 @@
 #include<bits/stdc++.h>
 using namespace std;
 
-class Node {
-    public:
-        int data;
-        Node* next;
+// Defining the Node structure
+struct Node {
+    int data;   // Data stored in the node
+    Node* next; // Pointer to the next node in the list
 
-        Node(int val)
-        {
-            data = val;
-            next = NULL;
-        }
+    // Constructor to initialize the node with a value
+    Node(int x) : data(x), next(NULL) {}
 };
 
+// Function to insert a node at the head of the list
 void insertAtHead(Node* &head, int val)
 {
     Node* newNode = new Node(val);
@@ -20,10 +18,12 @@ void insertAtHead(Node* &head, int val)
     head = newNode;
 }
 
+// Function to insert a node at the tail of the list
 void insertAtTail(Node* &head, int val)
 {
     Node* newNode = new Node(val);
 
+     // If the list is empty, insert the node at the head
     if(head == NULL)
     {
         insertAtHead(head, val);
@@ -32,6 +32,7 @@ void insertAtTail(Node* &head, int val)
 
     Node* temp = head;
 
+    // Traverse to the end of the list
     while(temp->next != NULL)
     {
         temp = temp->next;
@@ -40,16 +41,18 @@ void insertAtTail(Node* &head, int val)
     temp->next = newNode;
 }
 
-void display(Node* head)
+// Function to print the linked list
+void printList(Node* head)
 {
     Node* temp = head;
 
+    // Traverse to the end of the list
     while(temp != NULL)
     {
         cout<< temp->data << " -> ";
         temp = temp->next;
     }
-    cout<<"NULL\n";
+    cout << "NULL\n" ;
 }
 
 void makeCycle(Node* &head, int position)
@@ -79,6 +82,17 @@ void removeCycle(Node* &head)
         slow = slow->next;
         fast = fast->next->next;
     } while(slow != fast);
+
+    if(fast == head)
+    {
+        while(slow->next != head)
+        {
+            slow = slow->next;
+        }
+        
+        slow->next = NULL;
+        return;
+    }
 
     fast = head;
     while(slow->next != fast->next)
@@ -144,9 +158,9 @@ int main()
     insertAtTail(head, 5);
     insertAtTail(head, 6);
 
-    display(head);
+    printList(head);
 
-    makeCycle(head, 5);
+    makeCycle(head, 1);
 
     cout << detectCycle(head) << endl;
     cout << findCyclePosition(head) << endl;
