@@ -7,7 +7,9 @@ void print(int n) {
         return;
 
     cout << n << endl;
+    
     print(n - 1);
+    
 }
 
 int main() {
