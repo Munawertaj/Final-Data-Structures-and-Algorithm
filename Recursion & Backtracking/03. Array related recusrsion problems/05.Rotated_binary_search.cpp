@@ -24,7 +24,6 @@ int rotatedBinarySearch(vector<int>& nums, int target, int left, int right) {
     if (target >= nums[mid] && target <= nums[right])
         return rotatedBinarySearch(nums, target, mid + 1, right);
     
-
     return rotatedBinarySearch(nums, target, left, mid - 1);
 
 }
