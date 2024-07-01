@@ -34,7 +34,7 @@ vector<vector<int>> generateSubsets2(vector<int>& arr)
 
         for (int i = 0; i < total; i++)
         {
-            vector<int> subset(allSubsets[i]); // Copy existing subset
+            vector<int> subset = allSubsets[i]; // Copy existing subset
             subset.push_back(num); // Add current number
             allSubsets.push_back(subset); // Add the new subset to the outer vector
         }
