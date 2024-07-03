@@ -5,7 +5,7 @@
 using namespace std;
 
 // Function to generate all subsequences(Not pass by references) and store them in allSubSequences
-void generatingSubSequences1(int index, string& original, string SubSequence, vector<string>& allSubSequences)
+void generatingSubSequences1(int index, string& original, string& SubSequence, vector<string>& allSubSequences)
 {
     if(index == original.size())
     {
@@ -19,7 +19,9 @@ void generatingSubSequences1(int index, string& original, string SubSequence, ve
     // Include the current character
     SubSequence.push_back(original[index]);
     generatingSubSequences1(index + 1, original, SubSequence, allSubSequences);
-    
+
+    // Remove the character which is added
+    SubSequence.pop_back();
 }
 
 // Function to generate all subsequences and store them in allSubSequences (MOSTLY USED)
@@ -113,6 +115,5 @@ int main()
 
 
     printAllSubSequences(allSubSequences);
-
     return 0;
 }

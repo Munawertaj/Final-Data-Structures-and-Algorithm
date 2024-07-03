@@ -4,7 +4,7 @@
 using namespace std;
 
 // Function to generate all Subsets(Not pass by references) and store them in allSubsets
-void generateSubsets1(int index, vector<int>& original, vector<int> subset, vector<vector<int>>& allSubSets)
+void generateSubsets1(int index, vector<int>& original, vector<int>& subset, vector<vector<int>>& allSubSets)
 {
     if(index == original.size())
     {
@@ -17,6 +17,9 @@ void generateSubsets1(int index, vector<int>& original, vector<int> subset, vect
     // Include the current item
     subset.push_back(original[index]);
     generateSubsets1(index + 1,  original, subset, allSubSets);
+
+    // Remove the item which is added
+    subset.pop_back();
 }
 
 // Function to generate all Subsets and store them in allSubsets(MOSTLY USED)
@@ -109,5 +112,5 @@ int main()
     // allSubsets = generateSubsets4(0, nums, subset);
 
     printAllSubSets(allSubsets);
-
+    return 0;
 }
