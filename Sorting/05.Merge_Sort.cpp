@@ -43,7 +43,7 @@ vector<int> mergeSort(vector<int> arr) {
 
     int mid = arr.size() / 2;
     
-    // Copy the first half into the left vector and remaining half into the right vector
+    // Copy the first half into the start vector and remaining half into the end vector
     vector<int> left(arr.begin(), arr.begin() + mid);
     vector<int> right(arr.begin() + mid, arr.end());
 
@@ -60,14 +60,14 @@ vector<int> mergeSort(vector<int> arr) {
 // Approach - 2 (More efficient) (Updating the array instead of creating new array at every recursion call)
 
 // Function to merge two sorted segments of the array in place
-void mergeInPlace(vector<int>& arr, int left, int mid, int right) {
+void mergeInPlace(vector<int>& arr, int start, int mid, int end) {
 
-    vector<int> temp(right - left + 1); // Temporarily stores merged vector
+    vector<int> temp(end - start + 1); // Temporarily stores merged vector
 
-    int index1 = left, index2 = mid + 1, tempIndex = 0;
+    int index1 = start, index2 = mid + 1, tempIndex = 0;
 
     // Merge elements from both segments in sorted order
-    while(index1 <= mid && index2 <= right) {
+    while(index1 <= mid && index2 <= end) {
 
         if(arr[index1] <= arr[index2])
             temp[tempIndex++] = arr[index1++];
@@ -81,30 +81,30 @@ void mergeInPlace(vector<int>& arr, int left, int mid, int right) {
     }
 
     // Copy remaining elements from the second segment, if any
-    while(index2 <= right) {
+    while(index2 <= end) {
         temp[tempIndex++] = arr[index2++];
     }
 
     // Copy the merged elements back to the original array
     for(int i = 0; i < temp.size(); ++i) {
-        arr[left + i] = temp[i];
+        arr[start + i] = temp[i];
     }
 }
 
 // Recursive merge sort function that updates the array in place
-void mergeSortInPlace(vector<int>& arr, int left, int right) {
+void mergeSortInPlace(vector<int>& arr, int start, int end) {
     // Base case: if the segment has one or no elements, it is already sorted
-    if(left >= right)
+    if(start >= end)
         return;
     
-    int mid = (left + right) / 2;
+    int mid = (start + end) / 2;
 
     // Recursively sort both halves
-    mergeSortInPlace(arr, left, mid);
-    mergeSortInPlace(arr, mid + 1, right);
+    mergeSortInPlace(arr, start, mid);
+    mergeSortInPlace(arr, mid + 1, end);
 
     // Merge the sorted halves
-    mergeInPlace(arr, left, mid, right);
+    mergeInPlace(arr, start, mid, end);
 }
 
 // Function to print the elements of an array
