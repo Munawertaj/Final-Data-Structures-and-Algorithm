@@ -1,16 +1,17 @@
 #include<iostream>
 #include<vector>
+#include<climits>
 using namespace std;
 
-int maximumIndex(vector<int>& nums, int start, int end)
+int findMinimumIndex(vector<int>& nums, int start)
 {
-    int maximum = INT_MIN, index;
+    int minimum = INT_MAX, index;
 
-    for(int i = start; i <= end; ++i)
+    for(int i = start; i < nums.size(); ++i)
     {
-        if(nums[i] > maximum)
+        if(nums[i] < minimum)
         {
-            maximum = nums[i];
+            minimum = nums[i];
             index = i;
         }
     }
@@ -19,12 +20,12 @@ int maximumIndex(vector<int>& nums, int start, int end)
 
 void selectionSort(vector<int>& nums)
 {
-    int total = nums.size();
-
-    for(int i = total - 1; i >= 0; --i)
+    for(int i = 0; i < nums.size(); ++i)
     {
-        int index = maximumIndex(nums, 0, i);
-        swap(nums[i], nums[index]);
+        int index = findMinimumIndex(nums, i);
+        
+        if(nums[i] != nums[index])
+            swap(nums[i], nums[index]);
     }
 }
 
