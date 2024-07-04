@@ -87,7 +87,7 @@ void mergeInPlace(vector<int>& arr, int start, int mid, int end) {
 
     // Copy the merged elements back to the original array
     for(int i = 0; i < temp.size(); ++i) {
-        arr[start + i] = temp[i];
+        arr[start + i] = temp[i];   // Since the original array will be updated from the start position
     }
 }
 
