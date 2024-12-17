@@ -2,7 +2,7 @@
 using namespace std;
 int INF = INT_MAX;
 
-int diajkstra(vector<vector<pair<int, int>>>& graph, int source, int destination)
+int dijkstra(vector<vector<pair<int, int>>>& graph, int source, int destination)
 {
     int nodes = graph.size();
     vector<bool> visited(nodes + 1, false);
@@ -52,7 +52,7 @@ void printPath(vector<int>& parent, int source, int destination)
     }
 }
 
-void diajkstraPath(vector<vector<pair<int, int>>>& graph, int source, int destination)
+void dijkstraPath(vector<vector<pair<int, int>>>& graph, int source, int destination)
 {
     int nodes = graph.size();
     vector<bool> visited(nodes + 1, false);
@@ -89,7 +89,7 @@ void diajkstraPath(vector<vector<pair<int, int>>>& graph, int source, int destin
     if(visited[destination])
         printPath(parent, source, destination);
     else
-        cout << " -1";
+        cout << "-1";
 }
 
 void solve()
@@ -107,30 +107,12 @@ void solve()
     }
 
     int source = 1, destination = nodes;
-
-    diajkstraPath(graph, source, destination);
-}
-
-void solve()
-{
-    int nodes, edges;
-    cin >> nodes >> edges;
-    vector<vector<pair<int, int>>> graph(nodes + 1);    // since 1 is start
-
-    int node1, node2, weight;
-    for(int i = 0; i < edges; ++i)
-    {
-        cin >> node1 >> node2 >> weight;
-        graph[node1].push_back({weight, node2});
-        graph[node2].push_back({weight, node1});    // For undirected graph
-    }
-
-    int source = 1, destination = nodes;
-
-    cout << diajkstra(graph, source, destination);
+    cout << dijkstra(graph, source, destination);
+    // dijkstraPath(graph, source, destination);
 }
 
 int main()
 {
     solve();
+    return 0;
 }
