@@ -3,8 +3,8 @@
 using namespace std;
 
 // Directions: up -> (-1, 0), down -> (1, 0), left -> (0, -1), right -> (0, 1)
-int dx[] = {-1, 1, 0, 0};
-int dy[] = {0, 0, -1, 1};
+vector<int> dx = {-1, 1, 0, 0};
+vector<int> dy = {0, 0, -1, 1};
 
 bool isValid(int row, int col, vector<vector<int>>& grid)
 {
