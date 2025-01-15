@@ -3,9 +3,8 @@
 using namespace std;
 
 // Directions: up -> (-1, 0), down -> (1, 0), left -> (0, -1), right -> (0, 1)
-int dx[] = {-1, 1, 0, 0};
-int dy[] = {0, 0, -1, 1};
-
+vector<int> dx = {-1, 1, 0, 0};
+vector<int> dy = {0, 0, -1, 1};
 
 bool isValid(int row, int col, vector<vector<int>>& grid)
 {
@@ -61,16 +60,13 @@ int countConnectedComponents(vector<vector<int>>& grid)
     return connectedComponent;
 }
 
-// Function to take inputs for the grid and count connected components
 void solve()
 {
     int numRows, numCols;
     cin >> numRows >> numCols;
 
-    // Initialize the grid with numRows x numCols dimensions
     vector<vector<int>> grid(numRows, vector<int>(numCols));
 
-    // Take input for grid values
     for (int r = 0; r < numRows; r++)
     {
         for (int c = 0; c < numCols; c++)
@@ -79,7 +75,6 @@ void solve()
         }
     }
 
-    // Count and print the number of connected components in the grid
     int connectedComponent = countConnectedComponents(grid);
     cout << "Number of connected components: " << connectedComponent << endl;
 }
