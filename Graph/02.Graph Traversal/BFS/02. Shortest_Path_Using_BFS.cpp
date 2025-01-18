@@ -1,31 +1,47 @@
 #include <iostream>
 #include <vector>
 #include <queue>
+#include <algorithm>
+
 using namespace std;
 
-void bfs(int sourceNode, vector<vector<int>> &graph) 
+vector<int> backtrackPath(int node, vector<int>& parent)
+{
+    vector<int> path;
+    
+    while (node != -1)
+    {
+        path.push_back(node);
+        node = parent[node];
+    }
+
+    reverse(path.begin(), path.end());
+    return path;
+}
+
+vector<int> shortestPathUsingBFS(int sourceNode, int destination, vector<vector<int>> &graph) 
 {
     int numOfNodes = graph.size();
     vector<bool> visited(numOfNodes, false);
     queue<int> bfsQueue;
+
     vector<int> parent(numOfNodes);
-    vector<int> level(numOfNodes);
+    vector<int> level(numOfNodes, -1);  // -1 represent it is impossible to reach from source to destination
 
     bfsQueue.push(sourceNode);
     visited[sourceNode] = true;
     parent[sourceNode] = -1;
     level[sourceNode] = 0;
 
-    while(!bfsQueue.empty())
+    while (!bfsQueue.empty())
     {
         int currNode = bfsQueue.front();
         bfsQueue.pop();
 
-        cout << currNode << " -> "; // to print the order of the traversal of bfs
 
-        for(int child : graph[currNode])
+        for (int child : graph[currNode])
         {
-            if(visited[child]) continue;
+            if (visited[child]) continue;
 
             bfsQueue.push(child);
             visited[child] = true;
@@ -34,23 +50,22 @@ void bfs(int sourceNode, vector<vector<int>> &graph)
         }
     }
 
+    if (!visited[destination]) return {};    // If it is impossible to reach from source to destination
+    
+    return backtrackPath(destination, parent);
 }
 
-
-void printList(vector<vector<int>> &graph) 
+void printPath(vector<int>& path)
 {
-    int numOfNodes = graph.size();
+    if (path.size() == 0)
+    {
+        cout << "Path not exists!!!";
+        return;
+    }
 
-    for(int i = 1; i < numOfNodes; ++i) 
-    {    
-        cout << i << " --> ";
-
-        for(int node : graph[i]) 
-        {
-            cout << node << ", ";
-        }
-
-        cout << endl;
+    for (int node: path)
+    {
+        cout << node << " -> ";
     }
 }
 
@@ -69,9 +84,11 @@ void solve()
         graph[node2].push_back(node1);    // for undirected graph
     }
 
-    // printList(graph);
+    int source, destination;
+    cin >> source >> destination;
+    vector<int> path = shortestPathUsingBFS(source, destination, graph);
 
-    bfs(0, graph);
+    printPath(path);
 }
 
 
