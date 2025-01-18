@@ -2,14 +2,15 @@
 #include<vector>
 using namespace std;
 
-void dfs(int node, vector<vector<int>> &graph, vector<bool>& visited) {
-
+void dfs(int node, vector<vector<int>> &graph, vector<bool>& visited) 
+{
     // Take action on node after entering that node
     visited[node] = true;
 
-    for(int child : graph[node]) {
-
-        if(!visited[child]) {
+    for (int child : graph[node]) 
+    {
+        if (!visited[child]) 
+        {
             // Take action on child-node before entering that child-node
 
             dfs(child, graph, visited);
@@ -21,33 +22,37 @@ void dfs(int node, vector<vector<int>> &graph, vector<bool>& visited) {
 }
 
 // Taking inputs without Weight
-void takeInputs(int numOfNodes, int numOfEdges, vector<vector<int>> &graph) {
-
+void takeInputs(int numOfNodes, int numOfEdges, vector<vector<int>> &graph) 
+{
     int node1, node2;
 
-    for(int i = 0; i < numOfEdges; ++i) {
-
+    for (int i = 0; i < numOfEdges; ++i) 
+    {
         cin >> node1 >> node2;
         graph[node1].push_back(node2);
         graph[node2].push_back(node1);    // for undirected graph
     }
 }
 
-void printList(vector<vector<int>> &graph) {
-
+void printList(vector<vector<int>> &graph) 
+{
     int numOfNodes = graph.size();
 
-    for(int i = 1; i < numOfNodes; ++i) {
-        
+    for (int i = 1; i < numOfNodes; ++i) 
+    {
         cout << i << " --> ";
-        for(int node : graph[i]) {
+
+        for (int node : graph[i]) 
+        {
             cout << node << ", ";
         }
+
         cout << endl;
     }
 }
 
-int main() {
+int main() 
+{
     int numOfNodes, numOfEdges;
     cin >> numOfNodes >> numOfEdges;
 
